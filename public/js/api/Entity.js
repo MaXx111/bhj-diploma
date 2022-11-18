@@ -15,7 +15,7 @@ class Entity {
       url: this.URL,
       data, 
       method: "GET",
-      callback,
+      callback: callback,
     })
   }
 

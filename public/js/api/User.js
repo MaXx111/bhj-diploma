@@ -45,7 +45,7 @@ class User {
       method: "GET",
       callback: (err, response) => {
         if (response && response.user) {
-          this.setCurrent(response,user);
+          this.setCurrent(response.user);
         } else {
           console.log(err)
           this.unsetCurrent();
@@ -94,21 +94,10 @@ class User {
         } else {
           console.log(err);
         }
-        callback(err, callback);
+        callback(err, response);
       }
     })
   }
-
-  // const data = {
-  //   name: 'Vlad',
-  //   email: 'test@test.ru',
-  //   password: 'abracadabra'
-  // }
-
-  // User.register( data, ( err, response ) => {
-  //   console.log( response.success );
-  //   console.log( err )
-  // });
 
   /**
    * Производит выход из приложения. После успешного
@@ -126,7 +115,3 @@ class User {
     })
   }
 }
-
-// User.logout((err, response) => {
-//  console.log(response);
-// });

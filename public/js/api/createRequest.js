@@ -10,6 +10,7 @@ const createRequest = (options = {}) => {
     xhr.responseType = 'json';
     let formData;
     let getUrl;
+    let dataUrl
 
     if (options.method === "GET") {
         if (!options.data) {
@@ -21,11 +22,13 @@ const createRequest = (options = {}) => {
             };
         }
     } else if (options.method !== "GET") {
-        getUrl =options.url;
-        let dataUrl = Object.entries(options.data);
+        getUrl = options.url;
         formData = new FormData();
-        for (const [key, value] of dataUrl) {
-            formData.append(key, value);
+        if (options.data) {
+            dataUrl = Object.entries(options.data);
+            for (const [key, value] of dataUrl) {
+                formData.append(key, value);
+            }
         }
     }
 
