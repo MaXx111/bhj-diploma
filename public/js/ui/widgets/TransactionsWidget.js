@@ -11,7 +11,12 @@ class TransactionsWidget {
    * Если переданный элемент не существует,
    * необходимо выкинуть ошибку.
    * */
-  constructor( element ) {
+  constructor( element ) { 
+    if (!element) {
+      throw new Error(`Что то не так с этим объектом - ${element}`)
+    }
+    this.element = element;
+    this.registerEvents();
 
   }
   /**
@@ -20,7 +25,17 @@ class TransactionsWidget {
    * При нажатии вызывает Modal.open() для
    * экземпляра окна
    * */
-  registerEvents() {
+  registerEvents() {  
+    const incomeButton = document.querySelector('.create-income-button');
+    const expenseButton = document.querySelector('.create-expense-button');
+
+    incomeButton.addEventListener('click', () => {
+      App.getModal('newIncome').open();
+    });
+
+    expenseButton.addEventListener('click', () => {
+      App.getModal('newExpense').open();
+    });
 
   }
 }

@@ -13,14 +13,10 @@ const createRequest = (options = {}) => {
     let dataUrl
 
     if (options.method === "GET") {
-        if (!options.data) {
-            getUrl = options.url
-        } else {
-            getUrl = "?";
-            for (let key in options.data) {
-                getUrl += `${key}=${options.data[key]}&`;
-            };
-        }
+        getUrl = `${options.url}?`;
+        for (let key in options.data) {
+            getUrl += `${key}=${options.data[key]}&`;
+        };
     } else if (options.method !== "GET") {
         getUrl = options.url;
         formData = new FormData();

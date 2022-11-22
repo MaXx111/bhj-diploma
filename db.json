@@ -53,6 +53,24 @@
       "email": "knjknecw@rff",
       "password": "324",
       "id": "9m0hy1hulammkq2b"
+    },
+    {
+      "name": "ggsfsfsfs",
+      "email": "3222@fsss",
+      "password": "24344",
+      "id": "9m0hy2ellampm7f0"
+    },
+    {
+      "name": "MaXx111",
+      "email": "maxx11167@com",
+      "password": "123456",
+      "id": "9m0hy2eulampmu29"
+    },
+    {
+      "name": "55555",
+      "email": "maxx@55555",
+      "password": "55555",
+      "id": "9m0hy3zhlao5ksr3"
     }
   ],
   "accounts": [
@@ -195,6 +213,26 @@
       "name": "werfwrg43",
       "user_id": "9m0hy1hulammkq2b",
       "id": "9m0hy1nplamn8c8w"
+    },
+    {
+      "name": "ьт",
+      "user_id": "9m0hy1hulammkq2b",
+      "id": "9m0hy1rolamo077b"
+    },
+    {
+      "name": "Test4",
+      "user_id": "9m0hy2eulampmu29",
+      "id": "9m0hy2fhlampo4iw"
+    },
+    {
+      "name": "Test5",
+      "user_id": "9m0hy2eulampmu29",
+      "id": "9m0hy3vblao57hgn"
+    },
+    {
+      "name": "967giubju",
+      "user_id": "9m0hy2eulampmu29",
+      "id": "9m0hy3welao5iyas"
     }
   ],
   "transactions": [
@@ -332,6 +370,33 @@
       "sum": 300000,
       "type": "expense",
       "user_id": "1"
+    },
+    {
+      "id": "9m0hy3z5lao5js8o",
+      "type": "expense",
+      "name": "9698789790",
+      "sum": 98809,
+      "account_id": "9m0hy3vblao57hgn",
+      "user_id": "9m0hy2eulampmu29",
+      "created_at": "2022-11-19T16:36:18.743Z"
+    },
+    {
+      "id": "9m0hy9ellasdlqch",
+      "type": "income",
+      "name": "sfs",
+      "sum": 555,
+      "account_id": "9m0hy2fhlampo4iw",
+      "user_id": "9m0hy2eulampmu29",
+      "created_at": "2022-11-22T15:32:51.232Z"
+    },
+    {
+      "id": "9m0hy9ezlasdm7jd",
+      "type": "expense",
+      "name": "3434",
+      "sum": 2424,
+      "account_id": "9m0hy2fhlampo4iw",
+      "user_id": "9m0hy2eulampmu29",
+      "created_at": "2022-11-22T15:33:13.512Z"
     }
   ]
 }

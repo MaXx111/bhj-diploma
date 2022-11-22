@@ -59,8 +59,6 @@ class AccountsWidget {
     const currentUser = User.current();
     if (currentUser) {
       Account.list(currentUser, (err, response) => {
-        console.log(response);
-        console.log(currentUser);
         if(response && response.success) {
           this.clear();
           response.data.forEach(elem => {
@@ -95,7 +93,7 @@ class AccountsWidget {
    * */
   onSelectAccount( element ) {
     const allAccounts = document.querySelectorAll('.account');
-    const accountId = elem.getAttribute('data-id');
+    const accountId = element.getAttribute('data-id');
 
     allAccounts.forEach(elem => {
       elem.classList.remove('active');
@@ -110,9 +108,8 @@ class AccountsWidget {
    * отображения в боковой колонке.
    * item - объект с данными о счёте
    * */
-  getAccountHTML(item){ 
-    console.log(item);
-    const data = `<li class="active account" data-id="${item.id}">
+  getAccountHTML(item){
+    const data = `<li class="account" data-id="${item.id}">
                       <a href="#">
                         <span>${item.name}</span> /
                         <span>${item.sum} ₽</span>
