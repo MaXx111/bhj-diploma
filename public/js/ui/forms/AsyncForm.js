@@ -40,16 +40,10 @@ class AsyncForm {
    *  'название поля формы 2': 'значение поля формы 2'
    * }
    * */
-  getData() {
-    let options = {};
-    let formData = new FormData(this.element);
-    let enteries = formData.entries();
-    for(let item of enteries) {
-      const key = item[0],
-      value = item[1];
-      options[key] = value;
-    }
-    return options;
+   getData() {
+    const formData = new FormData(this.element);
+    console.log(`jhgjh`)
+    return Object.fromEntries(formData.entries());
   }
 
   onSubmit(options){

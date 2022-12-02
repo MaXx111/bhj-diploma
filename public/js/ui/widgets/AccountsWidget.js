@@ -37,10 +37,11 @@ class AccountsWidget {
       App.getModal('createAccount').open();
     });
 
-    allAccounts.forEach((elem) => {
-      elem.addEventListener('click', () => {
-        this.onSelectAccount(elem);
-      })
+    document.addEventListener('click', (event) => {
+      const selectedAccount = event.target.closest('.account')
+      if(selectedAccount) {
+        this.onSelectAccount(selectedAccount);
+      }
     })
 
   }
@@ -128,6 +129,5 @@ class AccountsWidget {
   renderItem(data){
     const panelForAccounts = document.querySelector('.accounts-panel');
     panelForAccounts.insertAdjacentHTML('beforeend', this.getAccountHTML(data));
-      this.registerEvents();
   }
 }

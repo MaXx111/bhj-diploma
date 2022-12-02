@@ -41,14 +41,13 @@ class TransactionsPage {
         this.removeAccount();
       })
     })
-
-    removeTransaction.forEach((elem) => {
-      elem.addEventListener('click', () => {
-        const dataId = elem.getAttribute('data-id');
-        this.removeTransaction(dataId);
-      })
-    })
-
+    document.addEventListener('click', (event) => {
+      const removeItem = event.target.closest('.transaction__remove');
+      if(removeItem){
+        const removeItemId = removeItem.getAttribute('data-id');
+        this.removeTransaction(removeItemId);
+      }
+    });
   }
 
   /**
@@ -61,14 +60,10 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-    if(!this.lastOptions){
-      return false;
-    } else {
-      const areYouSure = confirm("Вы действительно хотите удалить счёт?");
-      if (areYouSure) {
+    if(this.lastOptions){
+      if (confirm("Вы действительно хотите удалить счёт?")) {
         let id = this.lastOptions.account_id;
         Account.remove({id}, (err, response) => {
-          console.log(response)
           if(response && response.success){
             this.clear();
             App.updateWidgets();
@@ -86,7 +81,7 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction( id ) {
-    const areYouSure = confirm("Вы действительно хотите удалить счёт?");
+    const areYouSure = confirm("Вы действительно хотите удалить транзакцию?");
     if (areYouSure) {
       Transaction.remove({id}, (err, response) => {
         console.log(response)
@@ -105,9 +100,7 @@ class TransactionsPage {
    * в TransactionsPage.renderTransactions()
    * */
   render(options){
-    if(!options) {
-      return false
-    } else {
+    if(options) {
       this.lastOptions = options;
       Account.get(`${options.account_id}`, (err, response) => {
         if(response && response.success){
@@ -120,9 +113,6 @@ class TransactionsPage {
           this.renderTransactions(response.data);
         }
       })
-
-
-      // console.log(options);
     }
   }
 
@@ -133,7 +123,7 @@ class TransactionsPage {
    * */
   clear() {
     const empty = [];
-    this.renderTitle('«Название счёта');
+    this.renderTitle('Название счёта');
     this.renderTransactions(empty);
     this.lastOptions = null;
   }
@@ -152,7 +142,62 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
+    const dateSplit = date.split('T');
+    const splitDayYearMounth = dateSplit[0].split('-');
+    let dateMounth = splitDayYearMounth[1];
+    let dateYear = splitDayYearMounth[0];
+    let dateDay = splitDayYearMounth[2];
+    let dateTime = dateSplit[1].split(':');
 
+    if(dateMounth == 12) {
+      dateMounth = 'декабря'
+    }
+
+    if(dateMounth == 11) {
+      dateMounth = 'ноября'
+    }
+
+    if(dateMounth == 10) {
+      dateMounth = 'октября'
+    }
+
+    if(dateMounth == 9) {
+      dateMounth = 'сентября'
+    }
+
+    if(dateMounth == 8) {
+      dateMounth = 'августа'
+    }
+
+    if(dateMounth == 7) {
+      dateMounth = 'июля'
+    }
+
+    if(dateMounth == 6) {
+      dateMounth = 'июня'
+    }
+
+    if(dateMounth == 5) {
+      dateMounth = 'мая'
+    }
+
+    if(dateMounth == 4) {
+      dateMounth = 'апреля'
+    }
+
+    if(dateMounth == 3) {
+      dateMounth = 'марта'
+    }
+
+    if(dateMounth == 2) {
+      dateMounth = 'февраля'
+    }
+
+    if(dateMounth == 1) {
+      dateMounth = 'января'
+    }
+
+    return `${dateDay} ${dateMounth} ${dateYear} г. в ${dateTime[0]}:${dateTime[1]}`;
   }
 
   /**
@@ -168,7 +213,7 @@ class TransactionsPage {
       <div class="transaction__info">
           <h4 class="transaction__title">${item.name}</h4>
           <!-- дата -->
-          <div class="transaction__date">${item.created_at}10 марта 2019 г. в 03:20</div>
+          <div class="transaction__date">${this.formatDate(item.created_at)}</div>
       </div>
     </div>
     <div class="col-md-3">
@@ -191,11 +236,10 @@ class TransactionsPage {
    * */
   renderTransactions(data){
     const contentPanelForTransactions = document.querySelector('.content');
-
-    contentPanelForTransactions.textContent = "";
-    for(let i = 0; i < data.length; i++) {
-      contentPanelForTransactions.insertAdjacentHTML('beforeend', this.getTransactionHTML(data[i]));
-    };
-    this.registerEvents();
+    let html = "";
+    for (let i = 0; i < data.length; i++) {
+      html += this.getTransactionHTML(data[i]);
+    }
+    contentPanelForTransactions.innerHTML = html;
   }
 }

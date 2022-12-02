@@ -23,11 +23,12 @@ class CreateTransactionForm extends AsyncForm {
     if(User.current()) {
       Account.list(User.current(), (err, response) => {
         if(response && response.success) {
-          accountsList.innerHTML = "";
-
-          response.data.forEach(elem => {   
-            accountsList.innerHTML += `<option value="${elem.id}">${elem.name}</option>`;
-          });
+          console.log(response)
+          let html = "";
+          for (let i = 0; i < response.data.length; i++) {
+            html += `<option value="${response.data[i].id}">${response.data[i].name}</option>`;
+          }
+          accountsList.innerHTML = html;
         }
       });
     }
